@@ -59,3 +59,5 @@ src-tauri/icons/icon.ico
 *.deb
 *.AppImage
 *.msi
+.zenflow/
+GEMINI.md
