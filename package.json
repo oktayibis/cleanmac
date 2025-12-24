@@ -8,8 +8,18 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "typecheck": "tsc --noEmit"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "lint:rust": "cd src-tauri && cargo clippy -- -D warnings",
+    "fmt:rust": "cd src-tauri && cargo fmt --check",
+    "test:rust": "cd src-tauri && cargo test",
+    "quality:rust": "pnpm fmt:rust && pnpm lint:rust && pnpm test:rust",
+    "quality": "pnpm typecheck && pnpm lint && pnpm test && pnpm quality:rust"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -33,6 +43,14 @@
     "@eslint/js": "^9.17.0",
     "typescript-eslint": "^8.19.1",
     "eslint-plugin-react-hooks": "^5.1.0",
-    "globals": "^15.14.0"
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "vitest": "^2.1.8",
+    "@vitest/coverage-v8": "^2.1.8",
+    "@vitest/ui": "^2.1.8",
+    "@testing-library/react": "^16.1.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/user-event": "^14.5.2",
+    "jsdom": "^25.0.1"
   }
 }
