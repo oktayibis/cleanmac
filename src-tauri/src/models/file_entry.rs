@@ -5,8 +5,8 @@ use std::path::PathBuf;
 pub struct FileEntry {
     pub path: PathBuf,
     pub size: u64,
-    pub modified: i64,          // Unix timestamp
-    pub accessed: Option<i64>,  // Last access time
+    pub modified: i64,         // Unix timestamp
+    pub accessed: Option<i64>, // Last access time
     pub file_type: FileType,
     pub category: Option<String>,
 }

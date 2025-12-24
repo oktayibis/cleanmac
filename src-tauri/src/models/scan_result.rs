@@ -152,7 +152,7 @@ mod tests {
 
         let json = serde_json::to_string(&category).unwrap();
         let deserialized: CacheCategory = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(category.name, deserialized.name);
         assert_eq!(category.category_type, deserialized.category_type);
     }
@@ -168,7 +168,7 @@ mod tests {
             media_type: MediaType::Video,
             thumbnail_path: None,
         };
-        
+
         let json = serde_json::to_string(&file).unwrap();
         let deserialized: LargeFile = serde_json::from_str(&json).unwrap();
         assert_eq!(file.media_type, deserialized.media_type);

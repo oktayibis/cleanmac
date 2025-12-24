@@ -29,7 +29,7 @@ pub struct AutoCleanConfig {
     pub enabled: bool,
     pub schedule: AutoCleanSchedule,
     // We use String here to avoid circular deps, but typically it maps to CacheCategoryType
-    pub categories: Vec<String>, 
+    pub categories: Vec<String>,
     pub min_age_days: u32,
 }
 
@@ -115,12 +115,12 @@ mod tests {
             scan_locations: ScanLocations {
                 include_external_volumes: false,
                 custom_scan_paths: vec![],
-            }
+            },
         };
 
         let json = serde_json::to_string(&config).unwrap();
         let deserialized: AppConfig = serde_json::from_str(&json).unwrap();
-        
+
         assert!(matches!(deserialized.user_profile, UserProfile::Developer));
         assert_eq!(deserialized.appearance.theme, Theme::Dark);
     }

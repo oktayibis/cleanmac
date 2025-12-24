@@ -1,7 +1,7 @@
 // CleanMac - macOS disk cleanup and optimization utility
 
-pub mod utils;
 pub mod models;
+pub mod utils;
 
 use utils::format::{format_bytes, format_relative_time};
 
@@ -27,7 +27,11 @@ fn get_relative_time(timestamp: i64) -> String {
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![greet, format_size, get_relative_time])
+        .invoke_handler(tauri::generate_handler![
+            greet,
+            format_size,
+            get_relative_time
+        ])
         .run(tauri::generate_context!())
         .expect("error while running CleanMac application");
 }
