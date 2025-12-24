@@ -1,5 +1,6 @@
 // CleanMac - macOS disk cleanup and optimization utility
 
+pub mod commands;
 pub mod models;
 pub mod utils;
 
@@ -30,7 +31,12 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             greet,
             format_size,
-            get_relative_time
+            get_relative_time,
+            commands::system::get_disk_info,
+            commands::system::check_full_disk_access,
+            commands::system::open_full_disk_access_settings,
+            commands::system::reveal_in_finder,
+            commands::system::open_file
         ])
         .run(tauri::generate_context!())
         .expect("error while running CleanMac application");
