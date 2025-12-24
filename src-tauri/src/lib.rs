@@ -1,6 +1,7 @@
 // CleanMac - macOS disk cleanup and optimization utility
 
 pub mod utils;
+pub mod models;
 
 use utils::format::{format_bytes, format_relative_time};
 

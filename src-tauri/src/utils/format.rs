@@ -112,7 +112,7 @@ pub fn truncate_path(path: &str, max_length: usize) -> String {
     }
 
     let file_name = parts.last().unwrap_or(&"");
-    let first_part = parts.iter().take(2).collect::<Vec<_>>().join("/");
+    let first_part = parts.iter().take(2).map(|s| *s).collect::<Vec<_>>().join("/");
 
     if file_name.len() + first_part.len() + 5 > max_length {
         format!(".../{}", &file_name[file_name.len().saturating_sub(max_length - 4)..])
