@@ -46,4 +46,18 @@ mod tests {
         assert_eq!(greet(""), "Hello, ! Welcome to CleanMac.");
         assert_eq!(greet("Test User"), "Hello, Test User! Welcome to CleanMac.");
     }
+
+    #[test]
+    fn test_format_size_command() {
+        assert_eq!(format_size(1024), "1.00 KB");
+    }
+
+    #[test]
+    fn test_get_relative_time_command() {
+        let now = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_secs() as i64;
+        assert_eq!(get_relative_time(now), "Just now");
+    }
 }

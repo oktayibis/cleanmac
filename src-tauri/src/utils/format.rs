@@ -237,4 +237,69 @@ mod tests {
         assert_eq!(format_relative_time(now - 86400), "1 day ago");
         assert_eq!(format_relative_time(now - 172800), "2 days ago");
     }
+
+    #[test]
+    fn test_format_relative_time_weeks() {
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs() as i64;
+        // 1 week = 7 days = 604800 seconds
+        assert_eq!(format_relative_time(now - 604800), "1 week ago");
+        assert_eq!(format_relative_time(now - 1209600), "2 weeks ago");
+    }
+
+    #[test]
+    fn test_format_relative_time_months() {
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs() as i64;
+        // 1 month approx 30 days = 2592000 seconds
+        assert_eq!(format_relative_time(now - 2592000), "1 month ago");
+        assert_eq!(format_relative_time(now - 5184000), "2 months ago");
+    }
+
+    #[test]
+    fn test_format_relative_time_years() {
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs() as i64;
+        // 1 year approx 365 days = 31536000 seconds
+        assert_eq!(format_relative_time(now - 31536000), "1 year ago");
+        assert_eq!(format_relative_time(now - 63072000), "2 years ago");
+    }
+
+    #[test]
+    fn test_format_relative_time_future() {
+        let now = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap()
+            .as_secs() as i64;
+        assert_eq!(format_relative_time(now + 100), "In the future");
+    }
+
+    #[test]
+    fn test_truncate_path_very_short_components() {
+        // Path with <= 3 components
+        // /tmp/file -> ["", "tmp", "file"] (len 3)
+        let path = "/tmp/file";
+        assert_eq!(truncate_path(path, 5), path);
+    }
+
+    #[test]
+    fn test_truncate_path_middle_truncation() {
+        // Case where the path is long, but the file name and prefix fit, so we use ".../" in the middle
+        // path: /a/long_directory_name/file.txt (len 30)
+        // max_length: 20
+        // parts: ["", "a", "long_directory_name", "file.txt"]
+        // first_part: "/a"
+        // file_name: "file.txt"
+        // check: len(file_name) + len(first_part) + 5 = 8 + 2 + 5 = 15 <= 20
+        // Result should be "/a/.../file.txt"
+        let path = "/a/long_directory_name/file.txt";
+        let result = truncate_path(path, 20);
+        assert_eq!(result, "/a/.../file.txt");
+    }
 }

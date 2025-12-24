@@ -198,4 +198,35 @@ mod tests {
         let time = get_modified_time(&file_path).unwrap();
         assert!(time > 0);
     }
+
+    #[test]
+    fn test_get_accessed_time() {
+        let dir = tempdir().unwrap();
+        let file_path = dir.path().join("file_accessed.txt");
+        let mut file = File::create(&file_path).unwrap();
+        file.write_all(b"test").unwrap();
+
+        let time = get_accessed_time(&file_path).unwrap();
+        // Some systems/mounts might not support access time (noatime), but it should return Ok(Some(_)) or Ok(None)
+        // We just assert it doesn't panic and returns a reasonable result structure.
+        if let Some(t) = time {
+            assert!(t > 0);
+        }
+    }
+
+    #[test]
+    fn test_get_size_special() {
+        // Test a case that falls through is_file and is_dir (e.g. non-existent or special device, though non-existent would error on metadata)
+        // Since we check is_file and is_dir using the path object before calling metadata in some ways,
+        // actually get_size implementation:
+        // if path.is_file() ... else if path.is_dir() ... else { Ok(0) }
+        // We can pass a path that doesn't exist?
+        // path.is_file() returns false if doesn't exist.
+        // path.is_dir() returns false if doesn't exist.
+        // So it returns Ok(0).
+        let dir = tempdir().unwrap();
+        let non_existent = dir.path().join("ghost");
+        let size = get_size(&non_existent).unwrap();
+        assert_eq!(size, 0);
+    }
 }
