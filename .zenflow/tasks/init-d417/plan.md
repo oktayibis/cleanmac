@@ -5,6 +5,11 @@
 - **Reference Documents**:
   - `requirements.md` - Product Requirements Document
   - `spec.md` - Technical Specification
+- **Rules**:
+  1. Test each step before moving to the next.
+  2. Create a different branch for each step.
+  3. Add enough testing to pass quality gate.
+  4. Run quality gate and make sure everything is right.
 
 ---
 
@@ -60,7 +65,8 @@ Initialize the Tauri + React project structure.
 
 ---
 
-### [ ] Step: Rust Data Models
+### [x] Step: Rust Data Models
+<!-- chat-id: c40132f0-29cc-42da-95df-b5406c251877 -->
 <!-- phase: 1 -->
 
 Implement core data structures in Rust backend.
@@ -85,7 +91,7 @@ Implement core data structures in Rust backend.
 
 ---
 
-### [ ] Step: TypeScript Types
+### [x] Step: TypeScript Types
 <!-- phase: 1 -->
 
 Define TypeScript interfaces mirroring Rust models.
@@ -105,7 +111,7 @@ Define TypeScript interfaces mirroring Rust models.
 
 ---
 
-### [ ] Step: Rust Utilities
+### [x] Step: Rust Utilities
 <!-- phase: 1 -->
 
 Implement utility functions for file system operations.
@@ -129,7 +135,7 @@ Implement utility functions for file system operations.
 
 ---
 
-### [ ] Step: Cache Scanner Implementation
+### [x] Step: Cache Scanner Implementation
 <!-- phase: 1 -->
 
 Implement the core cache scanning logic.
@@ -154,7 +160,7 @@ Implement the core cache scanning logic.
 
 ---
 
-### [ ] Step: Tauri Commands - Scan
+### [x] Step: Tauri Commands - Scan
 <!-- phase: 1 -->
 
 Implement Tauri command handlers for scanning operations.
@@ -178,7 +184,7 @@ Implement Tauri command handlers for scanning operations.
 
 ---
 
-### [ ] Step: Cleaner Implementation
+### [x] Step: Cleaner Implementation
 <!-- phase: 1 -->
 
 Implement safe file deletion operations.
@@ -202,7 +208,7 @@ Implement safe file deletion operations.
 
 ---
 
-### [ ] Step: Tauri Commands - Clean & Config
+### [x] Step: Tauri Commands - Clean & Config
 <!-- phase: 1 -->
 
 Implement Tauri commands for cleaning and configuration.
@@ -225,7 +231,7 @@ Implement Tauri commands for cleaning and configuration.
 
 ---
 
-### [ ] Step: Tauri Commands - System
+### [x] Step: Tauri Commands - System
 <!-- phase: 1 -->
 
 Implement system information commands.

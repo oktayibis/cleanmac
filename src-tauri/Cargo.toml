@@ -50,9 +50,9 @@ env_logger = "0.11"
 # Error handling
 thiserror = "2"
 anyhow = "1"
-
-[dev-dependencies]
-tempfile = "3"
+uuid = { version = "1.19.0", features = ["v4", "serde"] }
+sysinfo = "0.36.1"
+open = "5.3.3"
 
 [profile.release]
 panic = "abort"
@@ -60,3 +60,6 @@ codegen-units = 1
 lto = true
 opt-level = "s"
 strip = true
+
+[dev-dependencies]
+tempfile = "3.24.0"
