@@ -15,7 +15,11 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
-    "quality": "pnpm typecheck && pnpm lint && pnpm test"
+    "lint:rust": "cd src-tauri && cargo clippy -- -D warnings",
+    "fmt:rust": "cd src-tauri && cargo fmt --check",
+    "test:rust": "cd src-tauri && cargo test",
+    "quality:rust": "pnpm fmt:rust && pnpm lint:rust && pnpm test:rust",
+    "quality": "pnpm typecheck && pnpm lint && pnpm test && pnpm quality:rust"
   },
   "dependencies": {
     "react": "^19.1.0",

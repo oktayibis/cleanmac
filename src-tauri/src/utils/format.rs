@@ -112,10 +112,13 @@ pub fn truncate_path(path: &str, max_length: usize) -> String {
     }
 
     let file_name = parts.last().unwrap_or(&"");
-    let first_part = parts.iter().take(2).map(|s| *s).collect::<Vec<_>>().join("/");
+    let first_part = parts.iter().take(2).copied().collect::<Vec<_>>().join("/");
 
     if file_name.len() + first_part.len() + 5 > max_length {
-        format!(".../{}", &file_name[file_name.len().saturating_sub(max_length - 4)..])
+        format!(
+            ".../{}",
+            &file_name[file_name.len().saturating_sub(max_length - 4)..]
+        )
     } else {
         format!("{}/.../{}", first_part, file_name)
     }
@@ -166,12 +169,18 @@ mod tests {
         assert_eq!(get_file_extension("file.PNG"), Some("png".to_string()));
         assert_eq!(get_file_extension("file.tar.gz"), Some("gz".to_string()));
         assert_eq!(get_file_extension("Makefile"), None);
-        assert_eq!(get_file_extension("/path/to/file.js"), Some("js".to_string()));
+        assert_eq!(
+            get_file_extension("/path/to/file.js"),
+            Some("js".to_string())
+        );
     }
 
     #[test]
     fn test_get_file_name() {
-        assert_eq!(get_file_name("/path/to/file.txt"), Some("file.txt".to_string()));
+        assert_eq!(
+            get_file_name("/path/to/file.txt"),
+            Some("file.txt".to_string())
+        );
         assert_eq!(get_file_name("file.txt"), Some("file.txt".to_string()));
         assert_eq!(get_file_name("/"), None);
     }
