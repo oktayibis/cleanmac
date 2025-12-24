@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles for macOS-like appearance */
+@layer base {
+  :root {
+    --color-bg: #ffffff;
+    --color-sidebar: rgba(246, 246, 246, 0.8);
+    --color-text: #1d1d1f;
+    --color-accent: #007aff;
+  }
+
+  .dark {
+    --color-bg: #1e1e1e;
+    --color-sidebar: rgba(30, 30, 30, 0.8);
+    --color-text: #f5f5f7;
+    --color-accent: #0a84ff;
+  }
+
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-macos-bg text-macos-text dark:bg-macos-bg-dark dark:text-macos-text-dark;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* Disable text selection for UI elements */
+  button, .no-select {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Custom scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Component styles */
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-macos font-medium transition-colors duration-150;
+  }
+
+  .btn-primary {
+    @apply bg-macos-accent text-white hover:bg-macos-accent-hover;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600;
+  }
+
+  .btn-danger {
+    @apply bg-macos-danger text-white hover:opacity-90;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-macos-lg shadow-macos dark:shadow-macos-dark p-4;
+  }
+
+  .sidebar {
+    @apply bg-macos-sidebar dark:bg-macos-sidebar-dark backdrop-blur-macos;
+  }
+}
